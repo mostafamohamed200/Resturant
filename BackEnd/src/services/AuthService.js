@@ -10,8 +10,8 @@ export default class AuthService {
     const { name, email, password } = data;
 
     // validation
-    if (!name  !email  !password) {
-      throw new Error("All fields are required");
+if (!name || !email || !password) {    
+   throw new Error("All fields are required");
     }
 
     const existing = await UserRepository.findByEmail(email);
