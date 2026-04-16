@@ -2,12 +2,17 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserRepository from "../repositories/UserRepository.js";
 
-const SECRET_KEY = "secret123";
+const SECRET_KEY = process.env.JWT_SECRET;
 
 export default class AuthService {
 
   static async register(data) {
-    const { name, email, password, role } = data;
+    const { name, email, password } = data;
+
+    // validation
+if (!name || !email || !password) {    
+   throw new Error("All fields are required");
+    }
 
     const existing = await UserRepository.findByEmail(email);
     if (existing) throw new Error("User already exists");
@@ -18,7 +23,7 @@ export default class AuthService {
       name,
       email,
       password: hashed,
-      role
+      role: "waiter" // fixed
     });
 
     return { message: "User created" };
@@ -26,6 +31,10 @@ export default class AuthService {
 
   static async login(data) {
     const { email, password } = data;
+
+    if (!email || !password) {
+      throw new Error("Email and password required");
+    }
 
     const user = await UserRepository.findByEmail(email);
     if (!user) throw new Error("User not found");
@@ -39,7 +48,9 @@ export default class AuthService {
       { expiresIn: "1d" }
     );
 
-    return { token, user };
-  }
+    // remove password
+    const { password: _, ...safeUser } = user;
 
+    return { token, user: safeUser };
+  }
 }
