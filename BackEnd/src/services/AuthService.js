@@ -48,8 +48,6 @@ if (!name || !email || !password) {
       { expiresIn: "1d" }
     );
 
-    // remove password
-    const { password: _, ...safeUser } = user;
 
     return { token, user: safeUser };
   }

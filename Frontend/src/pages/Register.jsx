@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -22,9 +24,10 @@ export default function Register() {
 
       alert("Registered Successfully ✅");
 
+      // 🔥 بعد التسجيل يروح login
+      navigate("/");
+
     } catch (err) {
-      console.log(err);
-      
       alert(err.response?.data?.error || "Error ❌");
     }
   };
@@ -52,6 +55,10 @@ export default function Register() {
       />
 
       <button type="submit">Register</button>
+
+      <p>
+        Already have an account? <Link to="/">Login</Link>
+      </p>
     </form>
   );
 }

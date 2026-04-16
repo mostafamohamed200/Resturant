@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,6 +22,9 @@ export default function Login() {
       localStorage.setItem("token", res.data.token);
 
       alert("Login Success ✅");
+
+      // 🔥 يوديك للداشبورد
+      navigate("/dashboard");
 
     } catch (err) {
       alert(err.response?.data?.error || "Login Failed ❌");
@@ -43,6 +48,11 @@ export default function Login() {
       />
 
       <button type="submit">Login</button>
+
+    
+      <p>
+        Don't have an account? <Link to="/register">Create Account</Link>
+      </p>
     </form>
   );
 }
