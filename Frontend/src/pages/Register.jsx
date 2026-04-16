@@ -13,12 +13,12 @@ export default function Register() {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "http://localhost:5000/auth/register",
         {
           name,
           email,
-          password,
-          role: "admin",
+          password
+          
         }
       );
 
@@ -28,7 +28,7 @@ export default function Register() {
       navigate("/");
 
     } catch (err) {
-      alert(err.response?.data?.error || "Error ❌");
+      alert(err.response?.data?.message|| "Error ❌");
     }
   };
 
@@ -40,18 +40,21 @@ export default function Register() {
         type="text"
         placeholder="Name"
         onChange={(e) => setName(e.target.value)}
+        required
       />
 
       <input
         type="email"
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
 
       <input
         type="password"
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
 
       <button type="submit">Register</button>

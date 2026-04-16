@@ -2,16 +2,13 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserRepository from "../repositories/UserRepository.js";
 
-const SECRET_KEY = process.env.JWT_SECRET;
-
 export default class AuthService {
 
   static async register(data) {
     const { name, email, password } = data;
 
-    // validation
-if (!name || !email || !password) {    
-   throw new Error("All fields are required");
+    if (!name || !email || !password) {
+      throw new Error("All fields are required");
     }
 
     const existing = await UserRepository.findByEmail(email);
@@ -23,7 +20,7 @@ if (!name || !email || !password) {
       name,
       email,
       password: hashed,
-      role: "waiter" // fixed
+      role: "waiter",
     });
 
     return { message: "User created" };
@@ -42,12 +39,25 @@ if (!name || !email || !password) {
     const match = await bcrypt.compare(password, user.password);
     if (!match) throw new Error("Wrong password");
 
+    // 👇 JWT SECRET (مهم جدًا)
+    const SECRET_KEY = process.env.JWT_SECRET;
+
+    if (!SECRET_KEY) {
+      throw new Error("JWT_SECRET is missing in .env");
+    }
+
     const token = jwt.sign(
       { id: user.id, role: user.role },
       SECRET_KEY,
       { expiresIn: "1d" }
     );
 
+    const safeUser = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    };
 
     return { token, user: safeUser };
   }
