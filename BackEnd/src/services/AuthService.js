@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserRepository from "../repositories/UserRepository.js";
 
-const SECRET_KEY = process.env.JWT_SECRET;
+const SECRET_KEY = process.env.JWT_SECRET || "secret123";
 
 export default class AuthService {
 
@@ -10,8 +10,8 @@ export default class AuthService {
     const { name, email, password } = data;
 
     // validation
-if (!name || !email || !password) {    
-   throw new Error("All fields are required");
+    if (!name || !email || !password) {
+      throw new Error("All fields are required");
     }
 
     const existing = await UserRepository.findByEmail(email);
@@ -19,14 +19,22 @@ if (!name || !email || !password) {
 
     const hashed = await bcrypt.hash(password, 10);
 
-    await UserRepository.create({
+    const newUser = await UserRepository.create({
       name,
       email,
       password: hashed,
-      role: "waiter" // fixed
+      role: "waiter" // تقدر تغيرها بعدين
     });
 
-    return { message: "User created" };
+    return {
+      message: "User created successfully",
+      user: {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role
+      }
+    };
   }
 
   static async login(data) {
@@ -48,7 +56,17 @@ if (!name || !email || !password) {
       { expiresIn: "1d" }
     );
 
+    const safeUser = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    };
 
-    return { token, user: safeUser };
+    return {
+      message: "Login successful",
+      token,
+      user: safeUser
+    };
   }
 }
