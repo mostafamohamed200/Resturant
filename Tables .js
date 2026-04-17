@@ -22,7 +22,7 @@ function Tables() {
   return (
     <div className="tables-page">
       <div className="table-form">
-        <h1>Reserve a Table</h1>
+        <h1>Reserve  Table</h1>
         <p>Select your details</p>
 
         <label>Party Size</label>
