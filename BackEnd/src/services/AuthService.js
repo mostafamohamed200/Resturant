@@ -2,14 +2,17 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserRepository from "../repositories/UserRepository.js";
 
-const SECRET_KEY = process.env.JWT_SECRET || "secret123";
+const SECRET_KEY = process.env.JWT_SECRET;
+
+if (!SECRET_KEY) {
+  throw new Error("JWT_SECRET is missing in .env");
+}
 
 export default class AuthService {
 
   static async register(data) {
     const { name, email, password } = data;
 
-    // validation
     if (!name || !email || !password) {
       throw new Error("All fields are required");
     }
@@ -23,7 +26,7 @@ export default class AuthService {
       name,
       email,
       password: hashed,
-      role: "waiter" // تقدر تغيرها بعدين
+      role: "waiter"
     });
 
     return {
@@ -56,17 +59,15 @@ export default class AuthService {
       { expiresIn: "1d" }
     );
 
-    const safeUser = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role
-    };
-
     return {
       message: "Login successful",
       token,
-      user: safeUser
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
     };
   }
 }

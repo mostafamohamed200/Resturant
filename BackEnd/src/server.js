@@ -1,13 +1,10 @@
-import express from "express";
 import dotenv from "dotenv";
-import app from "./app.js";
-import orderRoutes from "./routes/ordersRoutes.js";
-
 dotenv.config();
 
-const PORT = 5000;
+import app from "./app.js";
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`server is running ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
-app.use("/api", orderRoutes);
