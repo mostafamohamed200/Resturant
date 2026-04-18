@@ -9,3 +9,4 @@ router.post("/", authMiddleware, TableController.createTable);
 router.put("/:id", authMiddleware, TableController.updateTable);
 router.put("/:id/status", authMiddleware, TableController.updateStatus);
 export default router;
+

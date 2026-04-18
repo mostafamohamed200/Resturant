@@ -4,18 +4,21 @@ dotenv.config();
 import cors from "cors";
 
 import authRoutes from "./routes/authRoutes.js";
-import { errorHandler } from "./middleware/errorMiddleware.js";
+import tableRoutes from "./routes/tableRoutes.js";
 import mealsRoutes from "./routes/mealsRoutes.js";
-import ordersRoutes from "./routes/ordersRoutes.js";
+import orderRoutes from "./routes/ordersRoutes.js";
+import { errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
 // routes
-app.use("/auth", authRoutes);
-app.use("/api", mealsRoutes);
-app.use("/api", ordersRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/tables", tableRoutes);
+app.use("/api/meals", mealsRoutes);
+app.use("/api/orders", orderRoutes);
 
 // error middleware 
 app.use(errorHandler);
