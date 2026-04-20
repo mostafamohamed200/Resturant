@@ -1,0 +1,60 @@
+/* الحاوية الأساسية للوجبات */
+.meals {
+  display: grid;
+  /* ده بيخلي الوجبات تترص جنب بعض وتصغر وتكبر حسب الشاشة */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+  gap: 25px;
+  padding: 40px;
+  justify-content: center;
+}
+
+/* الكارت اللي شايل الوجبة */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden; /* مهم عشان الصور ما تخرجش بره الحواف الدائرية */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: 0.3s;
+  text-align: center;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+/* التحكم في الصور - الحل السحري لمشكلتك */
+.card img {
+  width: 100%;       /* العرض يملأ الكارت */
+  height: 180px;     /* ثبتي الطول هنا عشان كلهم يبقوا صف واحد */
+  object-fit: cover; /* بيقص الزيادة من الصورة ويحافظ على شكلها من غير ما تتمط */
+  display: block;
+}
+
+/* تنسيق الكلام جوه الكارت */
+.card h3 {
+  margin: 15px 0 5px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.card p {
+  color: #ff6b00; /* لون السعر */
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+/* الزرار */
+.card button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin: 0 20px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card button:hover {
+  background: #ff6b00;
+}
