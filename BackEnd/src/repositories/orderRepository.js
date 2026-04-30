@@ -1,4 +1,4 @@
-import db from "../config/db.js";
+import {db} from "../config/db.js";
 
 export const createOrder = async (table_id, user_id) => {
   const [result] = await db.execute(

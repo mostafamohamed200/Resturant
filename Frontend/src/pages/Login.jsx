@@ -1,6 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import api from "../api";
+import { useNavigate } from "react-router-dom";
+import "./auth.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -10,49 +11,76 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      alert("Enter email & password");
+      return;
+    }
+
     try {
-      const res = await axios.post(
-        "http://localhost:5000/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
+
+      console.log(res.data); // 👈 مهم للتأكد
 
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      alert("Login Success ✅");
+      const role = res.data.user.role;
 
-      // 🔥 يوديك للداشبورد
-      navigate("/dashboard");
-
+      // 🔥 routing
+switch (role) {
+  case "admin":
+    navigate("/dashboard");
+    break;
+  case "waiter":
+    navigate("/waiter");
+    break;
+  case "chef":
+    navigate("/chef");
+    break;
+  case "cashier":
+    navigate("/cashier");
+    break;
+  default:
+    navigate("/login");
+}
     } catch (err) {
-      alert(err.response?.data?.error || "Login Failed ❌");
+      console.log(err);
+      alert(err.response?.data?.message || "Login failed");
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Login</h2>
+    <div className="container">
+      <div className="left">
+        <h1>Restaurant System 🍽️</h1>
+      </div>
 
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+      <div className="right">
+        <div className="form-box">
+          <h2>Login</h2>
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-      <button type="submit">Login</button>
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-    
-      <p>
-        Don't have an account? <Link to="/register">Create Account</Link>
-      </p>
-    </form>
+            <button type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }

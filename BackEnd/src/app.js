@@ -1,6 +1,6 @@
-import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
+import express from "express";
 import cors from "cors";
 
 import authRoutes from "./routes/authRoutes.js";
@@ -15,10 +15,9 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-app.use("/api/auth", authRoutes);
-app.use("/api/tables", tableRoutes);
-app.use("/api/meals", mealsRoutes);
-app.use("/api/orders", orderRoutes);
+app.use("/auth", authRoutes);
+app.use("/api", mealsRoutes);
+app.use("/api", ordersRoutes);
 
 // error middleware 
 app.use(errorHandler);
