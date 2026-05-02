@@ -1,0 +1,124 @@
+.kitchen-board-container {
+  padding: 30px;
+  background-color: #f4f7fa;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.kitchen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.load-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #8a99af;
+  margin-top: 8px;
+}
+
+.progress-bar-bg {
+  width: 180px;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 10px;
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 20px;
+}
+
+.order-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border-left: 5px solid #d1d5db;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-card.new { border-left-color: #ef4444; }
+.order-card.preparing { border-left-color: #2563eb; }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.status-tag { font-size: 10px; font-weight: 800; }
+.status-tag.urgent { color: #ef4444; }
+.status-tag.prep { color: #2563eb; }
+
+.table-header h2 { font-size: 24px; margin: 0; color: #1e293b; }
+.covers-count { font-size: 12px; color: #64748b; }
+
+.items-container {
+  margin: 20px 0;
+  flex-grow: 1;
+}
+
+.order-item-row {
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.item-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-name { font-size: 14px; font-weight: 600; color: #334155; }
+.item-category-tag {
+  font-size: 9px;
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #64748b;
+  font-weight: bold;
+}
+
+.card-footer-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-action-start, .btn-action-ready, .btn-action-mark-ready {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 13px;
+  transition: opacity 0.2s;
+}
+
+.btn-action-start { background: #2563eb; color: white; }
+.btn-action-ready { background: #f8fafc; color: #2563eb; border: 1px solid #2563eb; }
+.btn-action-mark-ready { background: #2563eb; color: white; }
+
+.status-label-preparing {
+  flex: 1;
+  background: #eff6ff;
+  color: #2563eb;
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+}
