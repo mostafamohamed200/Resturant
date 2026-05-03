@@ -1,0 +1,117 @@
+/* الهيكل العام للتطبيق */
+.app-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f8fafc;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif; /* يفضل استخدام خط نظيف */
+}
+
+/* القائمة الجانبية (Sidebar) */
+.app-sidebar {
+  width: 260px;
+  background: white;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  flex-shrink: 0;
+}
+
+.brand-section {
+  padding: 0 24px 40px;
+}
+
+.brand-section h2 {
+  font-size: 20px;
+  color: #1e293b;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.brand-section p {
+  font-size: 10px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* روابط التنقل (Navigation) */
+.side-nav {
+  flex: 1;
+  padding: 0 16px;
+}
+
+.nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+/* التنسيق عند اختيار الصفحة */
+.nav-item.active {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+/* التنسيق عند تمرير الماوس */
+.nav-item:hover:not(.active) {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.nav-item .icon {
+  margin-right: 12px;
+  font-size: 18px;
+}
+
+/* منطقة المحتوى الرئيسية */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f8fafc;
+  scroll-behavior: smooth;
+}
+
+.view-container {
+  padding: 32px; /* زودت الـ padding شوية عشان الشاشة تتنفس */
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* زر تسجيل الخروج */
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #fff1f2; /* خلفية خفيفة محمرة */
+  border: none;
+  border-radius: 8px;
+  color: #ef4444;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #ffe4e6;
+}
