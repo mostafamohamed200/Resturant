@@ -1,0 +1,73 @@
+/* هذا الجزء سيجعل المربع يظهر بشكل احترافي في منتصف الشاشة */
+.tables-container {
+  display: flex;
+  justify-content: center; /* توسيط أفقي */
+  align-items: center;     /* توسيط رأسي */
+  min-height: 80vh;        /* يضمن أن الصفحة تأخذ مساحة كافية */
+  background-color: #f4f4f4; /* خلفية هادئة لكي يبرز المربع الأبيض */
+  padding: 20px;
+}
+
+.reserve-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 30px;      /* الحواف الدائرية "المودرن" */
+  width: 100%;
+  max-width: 420px;         /* عرض المربع كما في الصورة */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1); /* الظل الناعم */
+  text-align: left;
+}
+
+.reserve-card h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.reserve-card p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+/* تنسيق المدخلات لجعلها مريحة للعين */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.input-group select, 
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+}
+
+/* الزرار الأسود الأنيق */
+.book-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.book-btn:hover {
+  background-color: #333;
+  transform: translateY(-2px); /* حركة خفيفة عند اللمس */
+}
